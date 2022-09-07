@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     fetch("/productions").then((res) => {
       if (res.ok) {
-        res.json().then(setProductions);
+        res.json().then(setProductions); // same as productions => setProductions(productions)
       } else {
         res.json().then((data) => setErrors(data.error));
       }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 function EditProductionForm({ updateProduction }) {
   const [errors, setErrors] = useState([])
+  const history = useHistory();
   const [formData, setFormData] = useState({
     title: "",
     genre: "",
@@ -27,6 +28,21 @@ function EditProductionForm({ updateProduction }) {
   function onSubmit(e) {
     e.preventDefault();
     //PATCH to `/productions/${id}`
+    fetch(`/productions/${id}`, {
+      method: 'PATCH',
+      headers: 'Content-Type: application/json',
+      body: JSON.stringify(formData)
+    })
+    .then(res => {
+      if (res.ok) {
+        res.json()
+        .then(updateProduction)
+        history.push(`/productions/${id}`)
+      } else {
+        res.json()
+        .then(data => setErrors(data.error))
+      }
+    })
   }
   return (
     <div className="App">

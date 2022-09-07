@@ -20,6 +20,29 @@ function ProductionForm({ addProduction }) {
   function onSubmit(e) {
     e.preventDefault();
     //POST '/productions'
+    fetch('/productions', {
+      method: 'POST',
+      headers: {
+        // Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => {
+      if (res.ok) {
+        res.json()
+        .then(addProduction)
+      } else if (res.status === 404) {
+        setErrors("404")
+      } else {
+        res.json()
+        .then(data => setErrors(data.errors))
+      }
+    })
+  }
+
+  if (errors === "404") {
+    return <img src="" alt="" />
   }
 
   return (
