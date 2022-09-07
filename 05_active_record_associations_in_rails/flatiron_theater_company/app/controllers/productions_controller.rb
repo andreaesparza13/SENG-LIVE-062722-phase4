@@ -8,7 +8,7 @@ class ProductionsController < ApplicationController
 
     def show
         production = Production.find(params[:id])
-        render json: production, status: :ok
+        render json: production, include: :crew_members, status: :ok
     end 
 
     def create

@@ -62,7 +62,9 @@ function ProductionDetail({deleteProduction}) {
   if(loading) return <h1>Loading</h1>
   if(errors) return <h1>{errors}</h1>
 
-  const {id, title, budget, genre, image,description} = production 
+  const {id, title, budget, genre, image, description, crew_members } = production 
+
+  const crew = cast_members.map(member => <li>{member.role} {member.name}</li>)
  
   return (
       <CardDetail>
@@ -73,9 +75,9 @@ function ProductionDetail({deleteProduction}) {
               <p>{genre}</p>
               <h3>Description:</h3>
               <p>{description}</p>
-              <h2>Crew Memebers</h2>
+              <h2>Crew Members</h2>
               <ul>
-                {/* cast_members here */}
+                {crew}
               </ul>
             </div>
             <img src={image}/>
