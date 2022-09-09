@@ -6,7 +6,7 @@
 - [ ] Explain the purpose of serializers
 - [ ] Observe how serializers are used to shape json data
 
-Users -< Tickets > Producitons 
+Users < Tickets > Productions 
 ![associations.png](assets/associations.png) 
 
 ### Active Model Serializer
