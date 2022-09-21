@@ -1,20 +1,27 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-function Navigation({ currentUser }) {
+function Navigation({ currentUser, updateUser }) {
   const [menu, setMenu] = useState(false);
+  const history = useHistory()
 
   const handleLogOut = () => {
-    // DELETE `/logout`
+    fetch('/logout',{
+      method: "DELETE"
+    })
+    updateUser("")
+    history.push('/login') // redirect user to home page after logging out 
   };
+
+  console.log(currentUser)
 
   return (
     <Nav>
       <NavH1>Flatiron Theater Company</NavH1>
       <Menu>
-        <button onClick={handleLogOut}>Log Out</button>
+        {currentUser ? <button onClick={handleLogOut}>Log Out</button> : null}
         {!menu ? (
           <div onClick={() => setMenu(!menu)}>
             <GiHamburgerMenu size={30} />
