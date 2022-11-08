@@ -35,7 +35,6 @@ function Login({updateUser}) {
                 res.json().then(json => setErrors(json.errors))
             }
         })
-       
     }
 
     const handleChange = (e) => {

@@ -8,7 +8,7 @@ function Navigation({ currentUser, updateUser }) {
   const history = useHistory()
 
   const handleLogOut = () => {
-    fetch('/logout',{
+    fetch('/logout', {
       method: "DELETE"
     })
     updateUser("")
